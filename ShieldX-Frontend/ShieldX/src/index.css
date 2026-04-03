@@ -1,0 +1,32 @@
+:root {
+  font-family: 'Space Grotesk', 'Avenir Next', 'Helvetica Neue', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  --bg-soft: #f2f7f4;
+  --bg-accent: #d8ece4;
+  --ink: #13222f;
+  --ink-soft: #3e5160;
+  --primary: #0f766e;
+  --primary-strong: #0b5f59;
+  --danger: #b42318;
+  --success: #0b7a3b;
+  --border: #cad8df;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 12% 8%, var(--bg-accent), transparent 35%),
+    radial-gradient(circle at 90% 14%, #e9dfcf, transparent 30%),
+    linear-gradient(180deg, #fbfdfc, var(--bg-soft));
+  color: var(--ink);
+}

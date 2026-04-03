@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: shieldx-mysql
+spec:
+  serviceName: shieldx-mysql
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shieldx-mysql
+  template:
+    metadata:
+      labels:
+        app: shieldx-mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.4
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_DATABASE
+              value: sheidx
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: shieldx-secrets
+                  key: db-password
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+  volumeClaimTemplates:
+    - metadata:
+        name: mysql-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 5Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shieldx-mysql
+spec:
+  selector:
+    app: shieldx-mysql
+  ports:
+    - name: mysql
+      port: 3306
+      targetPort: 3306
